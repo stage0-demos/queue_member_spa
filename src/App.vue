@@ -7,7 +7,7 @@
         data-automation-id="nav-drawer-toggle"
         aria-label="Open navigation drawer"
       />
-      <v-app-bar-title>{{service.name | capitalize}}</v-app-bar-title>
+      <v-app-bar-title>Member</v-app-bar-title>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -16,49 +16,89 @@
       temporary
     >
       <v-list density="compact" nav>
-        {% for item in service.data_domains.controls %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>CURRICULUM DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/curriculums"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Curriculums"
+          data-automation-id="nav-curriculums-list-link"
         />
         <v-list-item
-          to="/{{ item | lower }}s/new"
+          to="/curriculums/new"
           prepend-icon="mdi-plus"
-          title="New {{ item }}"
-          data-automation-id="nav-{{ item | lower }}s-new-link"
+          title="New Curriculum"
+          data-automation-id="nav-curriculums-new-link"
         />
 
         <v-divider class="my-2" />
-        {% endfor %}
-        {% for item in service.data_domains.creates %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>RATING DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/ratings"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Ratings"
+          data-automation-id="nav-ratings-list-link"
         />
         <v-list-item
-          to="/{{ item | lower }}s/new"
+          to="/ratings/new"
           prepend-icon="mdi-plus"
-          title="New {{ item }}"
-          data-automation-id="nav-{{ item | lower }}s-new-link"
+          title="New Rating"
+          data-automation-id="nav-ratings-new-link"
         />
 
         <v-divider class="my-2" />
-        {% endfor %}
-        {% for item in service.data_domains.consumes %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>REVIEW DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/reviews"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Reviews"
+          data-automation-id="nav-reviews-list-link"
         />
-        {% endfor %}
+        <v-list-item
+          to="/reviews/new"
+          prepend-icon="mdi-plus"
+          title="New Review"
+          data-automation-id="nav-reviews-new-link"
+        />
+
+        <v-divider class="my-2" />
+        
+        
+        <v-list-subheader>EVENT DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/events"
+          prepend-icon="mdi-view-list"
+          title="List Events"
+          data-automation-id="nav-events-list-link"
+        />
+        <v-list-item
+          to="/events/new"
+          prepend-icon="mdi-plus"
+          title="New Event"
+          data-automation-id="nav-events-new-link"
+        />
+
+        <v-divider class="my-2" />
+        
+        
+        <v-list-subheader>RESOURCE DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/resources"
+          prepend-icon="mdi-view-list"
+          title="List Resources"
+          data-automation-id="nav-resources-list-link"
+        />
+        
+        <v-list-subheader>PATH DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/paths"
+          prepend-icon="mdi-view-list"
+          title="List Paths"
+          data-automation-id="nav-paths-list-link"
+        />
+        
       </v-list>
 
       <template v-slot:append>
