@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/{{ service.data_domains.controls[0] | lower }}s'
+      redirect: '/curriculums'
     },
     {
       path: '/login',
@@ -14,63 +14,117 @@ const router = createRouter({
       component: () => import('@/pages/LoginPage.vue'),
       meta: { requiresAuth: false }
     },
-    {% for item in service.data_domains.controls %}
-    // Control domain: {{ item }}
+    
+    // Control domain: Curriculum
     {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
+      path: '/curriculums',
+      name: 'Curriculums',
+      component: () => import('@/pages/CurriculumsListPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/new',
-      name: '{{ item }}New',
-      component: () => import('@/pages/{{ item }}NewPage.vue'),
+      path: '/curriculums/new',
+      name: 'CurriculumNew',
+      component: () => import('@/pages/CurriculumNewPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}Edit',
-      component: () => import('@/pages/{{ item }}EditPage.vue'),
+      path: '/curriculums/:id',
+      name: 'CurriculumEdit',
+      component: () => import('@/pages/CurriculumEditPage.vue'),
       meta: { requiresAuth: true }
     },
-    {% endfor %}
-    {% for item in service.data_domains.creates %}
-    // Create domain: {{ item }}
+    
+    // Control domain: Rating
     {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/{{ item | lower }}s/new',
-      name: '{{ item }}New',
-      component: () => import('@/pages/{{ item }}NewPage.vue'),
+      path: '/ratings',
+      name: 'Ratings',
+      component: () => import('@/pages/RatingsListPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}View',
-      component: () => import('@/pages/{{ item }}ViewPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {% endfor %}
-    {% for item in service.data_domains.consumes %}
-    // Consume domain: {{ item }}
-    {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
+      path: '/ratings/new',
+      name: 'RatingNew',
+      component: () => import('@/pages/RatingNewPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}View',
-      component: () => import('@/pages/{{ item }}ViewPage.vue'),
+      path: '/ratings/:id',
+      name: 'RatingEdit',
+      component: () => import('@/pages/RatingEditPage.vue'),
       meta: { requiresAuth: true }
     },
-    {% endfor %}
+    
+    // Control domain: Review
+    {
+      path: '/reviews',
+      name: 'Reviews',
+      component: () => import('@/pages/ReviewsListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/reviews/new',
+      name: 'ReviewNew',
+      component: () => import('@/pages/ReviewNewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/reviews/:id',
+      name: 'ReviewEdit',
+      component: () => import('@/pages/ReviewEditPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    
+    // Create domain: Event
+    {
+      path: '/events',
+      name: 'Events',
+      component: () => import('@/pages/EventsListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/events/new',
+      name: 'EventNew',
+      component: () => import('@/pages/EventNewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/events/:id',
+      name: 'EventView',
+      component: () => import('@/pages/EventViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    
+    // Consume domain: Resource
+    {
+      path: '/resources',
+      name: 'Resources',
+      component: () => import('@/pages/ResourcesListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/resources/:id',
+      name: 'ResourceView',
+      component: () => import('@/pages/ResourceViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    // Consume domain: Path
+    {
+      path: '/paths',
+      name: 'Paths',
+      component: () => import('@/pages/PathsListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/paths/:id',
+      name: 'PathView',
+      component: () => import('@/pages/PathViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
     // Admin route
     {
       path: '/admin',
@@ -94,7 +148,7 @@ router.beforeEach((to, _from, next) => {
   const requiredRole = to.meta.requiresRole as string | undefined
   if (requiredRole && !hasStoredRole(requiredRole)) {
     // Redirect to default page if user doesn't have required role
-    next({ name: '{{ service.data_domains.controls[0] }}s' })
+    next({ name: 'Curriculums' })
     return
   }
   
@@ -102,7 +156,7 @@ router.beforeEach((to, _from, next) => {
 })
 
 router.afterEach((to) => {
-  document.title = to.path === '/login' ? '{{info.name}} Login' : '{{service.name | capitalize}}'
+  document.title = to.path === '/login' ? 'Question Queue Login' : 'Member'
 })
 
 export default router
